@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Abakonzo USA</title>
+
+    <!-- Bootstrap, Icons, Fonts, AOS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        scroll-behavior: smooth;
+      }
+
+      .navbar {
+        background-color: #0f2f1e;
+        color: #ffff;
+        backdrop-filter: blur(8px);
+      }
+
+      .navbar .nav-link {
+        color: white !important;
+      }
+
+      .navbar .nav-link:hover {
+        color: #ffc107 !important;
+      }
+      #loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #ffffff;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      #loader.hidden {
+        display: none;
+      }
+
+      .hero-section {
+        background: url("/images/hero.png") no-repeat center center/cover;
+        min-height: 100vh;
+        padding: 100px 0;
+        color: white;
+        position: relative;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        text-align: left;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+
+      .hero-overlay {
+        background: rgba(0, 0, 0, 0.6);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 700px;
+        margin: 0 auto;
+      }
+
+      .btn-glow {
+        background-color: #ffc107;
+        border: none;
+        font-weight: bold;
+        color: #000;
+        padding: 12px 30px;
+        border-radius: 30px;
+        transition: 0.3s;
+      }
+
+      .btn-glow:hover {
+        background-color: #ffca2c;
+        box-shadow: 0 0 15px rgba(255, 193, 7, 0.6);
+      }
+
+      section {
+        padding: 80px 0;
+      }
+
+      .section-title {
+        font-weight: 600;
+        color: #0f2f1e;
+        margin-bottom: 25px;
+      }
+
+      .footer {
+        background-color: #0f2f1e;
+        color: white;
+        padding: 40px 15px;
+        text-align: center;
+      }
+
+      .footer a {
+        color: #ffc107;
+        margin: 0 8px;
+        text-decoration: none;
+      }
+      html {
+        scroll-padding-top: 80px; /* height of your fixed navbar */
+      }
+      body {
+        scroll-padding-top: 80px;
+      }
+      #topBtn {
+        display: none;
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background-color: #ffc107;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+        cursor: pointer;
+        z-index: 1000;
+      }
+
+      .gallery-grid {
+        column-count: 4;
+        column-gap: 1rem;
+      }
+      .gallery-item {
+        margin-bottom: 1rem;
+        break-inside: avoid;
+        position: relative;
+        overflow: hidden;
+        border-radius: 12px;
+      }
+
+      .gallery-item img {
+        width: 100%;
+        display: block;
+        border-radius: 12px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .gallery-item:hover img {
+        transform: scale(1.05);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+      @media (max-width: 992px) {
+        .gallery-grid {
+          column-count: 3;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .hero-section {
+          min-height: 20vh;
+          padding-top: 180px; /* Pushes content down below 'OMUKONZO' on image */
+          padding-bottom: 60px;
+          text-align: center;
+          background-position: top center;
+          background-size: cover;
+          position: relative;
+          display: flex;
+          align-items: flex-start;
+          justify-content: center;
+        }
+
+        .hero-content {
+          max-width: 100%;
+          padding: 0 15px;
+        }
+
+        .hero-section h1 {
+          font-size: 1.6rem;
+          line-height: 1.4;
+          margin-bottom: 20px;
+        }
+
+        .hero-section .btn-glow,
+        .hero-section .btn-outline-light {
+          width: 100%;
+          margin: 5px 0;
+        }
+      }
+      @media (max-width: 576px) {
+        .gallery-grid {
+          column-count: 1;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="#">
+          <img
+            src="/images/abakonzo-logo.png"
+            alt="Abakonzo Logo"
+            width="40"
+            height="40"
+            class="me-2"
+          />
+          <span
+            class="fw-bold text-warning"
+            style="font-size: 1.25rem; letter-spacing: 1px"
+          >
+            ABAKONZO <span class="text-white">IN THE USA</span>
+          </span>
+        </a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navContent"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navContent">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#culture">Culture</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#events">Events</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#members">Members</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#education">Education</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#gallery">Gallery</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#blog">Blog</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#join">Join</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contact">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Loader -->
+    <div id="loader">
+      <div class="spinner-border text-warning" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="hero-section">
+      <div class="hero-overlay"></div>
+      <div class="container hero-content">
+        <h1 class="display-4 fw-bold mb-4" data-aos="fade-down">
+          Promoting Culture.<br />Building a Community.
+        </h1>
+        <a
+          href="#join"
+          class="btn btn-glow me-3"
+          data-aos="fade-up"
+          data-aos-delay="200"
+          >Join the Community</a
+        >
+        <a
+          href="#events"
+          class="btn btn-outline-light"
+          data-aos="fade-up"
+          data-aos-delay="300"
+          >Upcoming Events</a
+        >
+      </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="py-5 bg-white text-dark">
+      <div class="container" data-aos="fade-up">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <h2 class="text-success fw-bold mb-3">About Us</h2>
+            <p class="fs-5 mb-4">
+              We celebrate, preserve, and promote the
+              <strong>Bakonzo culture</strong> while fostering unity, support,
+              and opportunities for Bakonzo in the USA.
+            </p>
+            <ul class="list-unstyled fs-5">
+              <li class="mb-3">
+                <i class="bi bi-stars text-warning me-2"></i> Organize cultural
+                festivals and meet-ups
+              </li>
+              <li class="mb-3">
+                <i class="bi bi-people-fill text-primary me-2"></i> Support new
+                immigrants with integration
+              </li>
+              <li class="mb-3">
+                <i class="bi bi-person-heart text-danger me-2"></i> Provide
+                networking and mentorship opportunities
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-lg-6 mb-4 mb-lg-0">
+            <img
+              src="/images/591cb51a-22bc-414f-8f3c-be3151d00885.jpg"
+              class="img-fluid rounded-4 shadow-sm"
+              alt="Bakonzo Dancers"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Culture Section -->
+    <section id="culture" class="py-5 bg-light text-dark">
+      <div class="container" data-aos="fade-up">
+        <h2 class="text-center text-success fw-bold mb-5">Our Culture</h2>
+        <div class="row g-4">
+          <!-- Music & Dance -->
+          <div class="col-md-6 col-lg-3">
+            <div class="card h-100 border-0 shadow-sm rounded-4">
+              <img
+                src="/images/Music-Dance.jpeg"
+                class="card-img-top rounded-top-4"
+                alt="Music and Dance"
+                style="height: 180px; object-fit: cover"
+              />
+              <div class="card-body">
+                <h5 class="card-title fw-semibold">Music & Dance</h5>
+                <p class="card-text small">
+                  Experience the rhythm of the Bakonzo—drums, horns, and
+                  traditional movements that tell ancestral stories.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dress & Language -->
+          <div class="col-md-6 col-lg-3">
+            <div class="card h-100 border-0 shadow-sm rounded-4">
+              <img
+                src="/images/Dress-Language.jpeg"
+                class="card-img-top rounded-top-4"
+                alt="Dress and Language"
+                style="height: 180px; object-fit: cover"
+              />
+              <div class="card-body">
+                <h5 class="card-title fw-semibold">Dress & Language</h5>
+                <p class="card-text small">
+                  Adorned in barkcloth and beads, the Bakonzo speak Lukonzo, a
+                  Bantu language rich in idioms and greetings.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cultural Beliefs -->
+          <div class="col-md-6 col-lg-3">
+            <div class="card h-100 border-0 shadow-sm rounded-4">
+              <img
+                src="/images/rwenzori-mountain.webp"
+                class="card-img-top rounded-top-4"
+                alt="Cultural Beliefs"
+                style="height: 180px; object-fit: cover"
+              />
+              <div class="card-body">
+                <h5 class="card-title fw-semibold">Cultural Beliefs</h5>
+                <p class="card-text small">
+                  Respect for ancestors, community over individual, and the
+                  sacred Rwenzori Mountains define Bakonzo heritage.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Photo Gallery -->
+          <div class="col-md-6 col-lg-3">
+            <div class="card h-100 border-0 shadow-sm rounded-4">
+              <img
+                src="/images/gallery.jpg"
+                class="card-img-top rounded-top-4"
+                alt="Gallery"
+                style="height: 180px; object-fit: cover"
+              />
+              <div class="card-body">
+                <h5 class="card-title fw-semibold">Gallery</h5>
+                <p class="card-text small">
+                  View moments from our community events, ceremonies, and
+                  Bakonzo gatherings across the USA.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Events Section -->
+    <section id="events" class="py-5 bg-white text-dark">
+      <div class="container" data-aos="fade-up">
+        <h2 class="text-center text-success fw-bold mb-5">
+          Events & Gatherings
+        </h2>
+
+        <!-- Upcoming Events -->
+        <div class="row g-4">
+          <!-- Event 1 -->
+          <div class="col-md-6 col-lg-4">
+            <div
+              class="card border-0 shadow-sm rounded-4 h-100 d-flex flex-column"
+            >
+              <img
+                src="/images/185ba170-d2e4-481a-8584-6b2bea1db490.JPG"
+                class="card-img-top rounded-top-4"
+                style="height: 180px; object-fit: cover"
+                alt="Cultural Fest"
+              />
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title fw-semibold">Annual Cultural Festival</h5>
+                <p class="card-text small flex-grow-1">
+                  Celebrate traditions through music, dance, and food. A vibrant
+                  day for all Bakonzo in the USA.
+                </p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <small class="text-muted"
+                    ><i class="bi bi-calendar-event"></i> Aug 10, 2025</small
+                  >
+                  <a href="#" class="btn btn-sm btn-outline-success">RSVP</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Event 2 -->
+          <div class="col-md-6 col-lg-4">
+            <div
+              class="card border-0 shadow-sm rounded-4 h-100 d-flex flex-column"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d"
+                class="card-img-top rounded-top-4"
+                style="height: 180px; object-fit: cover"
+                alt="Youth Meetup"
+              />
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title fw-semibold">Youth & Education Meetup</h5>
+                <p class="card-text small flex-grow-1">
+                  A special session for students and young professionals to
+                  connect, share, and learn.
+                </p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <small class="text-muted"
+                    ><i class="bi bi-calendar-event"></i> Sep 21, 2025</small
+                  >
+                  <a href="#" class="btn btn-sm btn-outline-success">RSVP</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Event 3 -->
+          <div class="col-md-6 col-lg-4">
+            <div
+              class="card border-0 shadow-sm rounded-4 h-100 d-flex flex-column"
+            >
+              <img
+                src="/images/591cb51a-22bc-414f-8f3c-be3151d00885.jpg"
+                class="card-img-top rounded-top-4"
+                style="height: 180px; object-fit: cover"
+                alt="Online Meetup"
+              />
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title fw-semibold">Virtual Networking Night</h5>
+                <p class="card-text small flex-grow-1">
+                  Meet Bakonzo professionals online. Share insights,
+                  opportunities, and build lasting bonds.
+                </p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <small class="text-muted"
+                    ><i class="bi bi-calendar-event"></i> Oct 15, 2025</small
+                  >
+                  <a href="#" class="btn btn-sm btn-outline-success">RSVP</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="text-center mt-5">
+          <a
+            href="#join"
+            class="btn btn-success px-5 py-2 rounded-pill fw-semibold"
+            >View All Events</a
+          >
+        </div>
+      </div>
+    </section>
+    <section id="members" class="py-5 bg-light text-dark">
+      <div class="container" data-aos="fade-up">
+        <h2 class="text-center text-success fw-bold mb-5">
+          Members & Networking
+        </h2>
+        <div class="row g-4">
+          <!-- Member Spotlight -->
+          <div class="col-md-6 col-lg-4">
+            <div
+              class="card border-0 shadow-sm rounded-4 h-100 d-flex flex-column text-center"
+            >
+              <img
+                src="/images/edwin.jpeg"
+                class="rounded-circle mx-auto mt-4"
+                width="100"
+                height="100"
+                alt="Profile"
+              />
+              <div class="card-body">
+                <h5 class="card-title fw-semibold">Edwin Bwambale</h5>
+                <p class="card-text small">Founder & CEO - Oliveeb, Member</p>
+                <a
+                  href="https://www.linkedin.com/in/edwinob"
+                  target="_blank"
+                  class="btn btn-outline-success btn-sm mt-2"
+                >
+                  <i class="bi bi-linkedin me-1"></i> Connect on LinkedIn
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div
+              class="card border-0 shadow-sm rounded-4 h-100 d-flex flex-column text-center"
+            >
+              <img
+                src="/images/kabanda.jpeg"
+                class="rounded-circle mx-auto mt-4"
+                width="100"
+                height="100"
+                alt="Profile"
+              />
+              <div class="card-body">
+                <h5 class="card-title fw-semibold">Dr Kabanda. Obed</h5>
+                <p class="card-text small">CEO & President CEDIL, Member</p>
+                <a
+                  href="https://www.linkedin.com/in/dr-obed-kabanda-19717a2b"
+                  target="_blank"
+                  class="btn btn-outline-success btn-sm mt-2"
+                >
+                  <i class="bi bi-linkedin me-1"></i> Connect on LinkedIn
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div
+              class="card border-0 shadow-sm rounded-4 h-100 d-flex flex-column text-center"
+            >
+              <img
+                src="/images/godwin.jpeg"
+                class="rounded-circle mx-auto mt-4"
+                width="100"
+                height="100"
+                alt="Profile"
+              />
+              <div class="card-body">
+                <h5 class="card-title fw-semibold">Godw Tusime</h5>
+                <p class="card-text small">
+                  Software Engineer - Ford, CEO-Olivwin, Chairman-Bakanzo
+                  Community, USA
+                </p>
+                <a
+                  href="https://www.linkedin.com/in/godwin-tusime"
+                  target="_blank"
+                  class="btn btn-outline-success btn-sm mt-2"
+                >
+                  <i class="bi bi-linkedin me-1"></i> Connect on LinkedIn
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div
+              class="card border-0 shadow-sm rounded-4 h-100 d-flex flex-column text-center"
+            >
+              <img
+                src="/images/yonah.jpeg"
+                class="rounded-circle mx-auto mt-4"
+                width="100"
+                height="100"
+                alt="Profile"
+              />
+              <div class="card-body">
+                <h5 class="card-title fw-semibold">Basi Y. Bwambale</h5>
+                <p class="card-text small">
+                  Software Engineer, Vice Chairman-Bakanzo Community, USA
+                </p>
+                <a
+                  href="https://www.linkedin.com/in/basiyonah/"
+                  target="_blank"
+                  class="btn btn-outline-success btn-sm mt-2"
+                >
+                  <i class="bi bi-linkedin me-1"></i> Connect on LinkedIn
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div
+              class="card border-0 shadow-sm rounded-4 h-100 d-flex flex-column text-center"
+            >
+              <img
+                src="/images/sam.jpeg"
+                class="rounded-circle mx-auto mt-4"
+                width="100"
+                height="100"
+                alt="Profile"
+              />
+              <div class="card-body">
+                <h5 class="card-title fw-semibold">Samuel Bwambale</h5>
+                <p class="card-text small">
+                  Software Engineer, Treasurer-Bakanzo Community, USA
+                </p>
+                <a
+                  href="https://www.linkedin.com/in/samuel-bwambale"
+                  target="_blank"
+                  class="btn btn-outline-success btn-sm mt-2"
+                >
+                  <i class="bi bi-linkedin me-1"></i> Connect on LinkedIn
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div
+              class="card border-0 shadow-sm rounded-4 h-100 d-flex flex-column text-center"
+            >
+              <img
+                src="images/jeniffer.jpeg"
+                class="rounded-circle mx-auto mt-4"
+                width="100"
+                height="100"
+                alt="Profile"
+              />
+              <div class="card-body">
+                <h5 class="card-title fw-semibold">Jennifer Muhindo</h5>
+                <p class="card-text small">
+                  Business Loan Originatorjen, Cordinator-Bakanzo Community, USA
+                </p>
+                <a
+                  href="https://www.linkedin.com/in/jennifermuhindo/"
+                  target="_blank"
+                  class="btn btn-outline-success btn-sm mt-2"
+                >
+                  <i class="bi bi-linkedin me-1"></i> Connect on LinkedIn
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div
+              class="card border-0 shadow-sm rounded-4 h-100 d-flex flex-column text-center"
+            >
+              <img
+                src="/images/gibert.jpeg"
+                class="rounded-circle mx-auto mt-4"
+                width="100"
+                height="100"
+                alt="Profile"
+              />
+              <div class="card-body">
+                <h5 class="card-title fw-semibold">Gilbert M Mumbere</h5>
+                <p class="card-text small">
+                  Software Engineer, Cordinator-Bakanzo Community, USA
+                </p>
+                <a
+                  href="https://www.linkedin.com/in/gilbert-mumbere/"
+                  target="_blank"
+                  class="btn btn-outline-success btn-sm mt-2"
+                >
+                  <i class="bi bi-linkedin me-1"></i> Connect on LinkedIn
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Business Promo -->
+          <div class="col-md-6 col-lg-4">
+            <div
+              class="card border-0 shadow-sm rounded-4 h-100 d-flex flex-column text-center"
+            >
+              <div class="card-body">
+                <i class="bi bi-shop display-4 text-warning mb-3"></i>
+                <h5 class="card-title fw-semibold">Promote Your Business</h5>
+                <p class="card-text small">
+                  Are you a Mukonzo entrepreneur? Feature your shop, product, or
+                  service here.
+                </p>
+                <a href="#join" class="btn btn-outline-success btn-sm mt-2"
+                  >Get Featured</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Volunteer Opportunities -->
+          <div class="col-md-6 col-lg-4">
+            <div
+              class="card border-0 shadow-sm rounded-4 h-100 d-flex flex-column text-center"
+            >
+              <div class="card-body">
+                <i class="bi bi-people display-4 text-info mb-3"></i>
+                <h5 class="card-title fw-semibold">Volunteer With Us</h5>
+                <p class="card-text small">
+                  Join hands to build our community. Roles include planning
+                  events, youth outreach, and mentorship.
+                </p>
+                <a
+                  href="https://wa.me/1XXXXXXXXXX?text=I%20would%20like%20to%20volunteer%20with%20Omukonzo%20USA"
+                  target="_blank"
+                  class="btn btn-outline-success btn-sm mt-2"
+                >
+                  <i class="bi bi-whatsapp me-1"></i> Join via WhatsApp
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="education" class="py-5 bg-white text-dark">
+      <div class="container" data-aos="fade-up">
+        <h2 class="text-center text-success fw-bold mb-5">
+          Education & Empowerment
+        </h2>
+
+        <div class="row g-4 text-center">
+          <!-- Mentorship -->
+          <div class="col-md-6 col-lg-3">
+            <div class="p-4 border rounded-4 h-100 shadow-sm">
+              <i class="bi bi-person-video3 display-4 text-primary mb-3"></i>
+              <h5 class="fw-semibold">Mentorship Programs</h5>
+              <p class="small">
+                Get guidance from experienced professionals — from students to
+                adults seeking career growth.
+              </p>
+            </div>
+          </div>
+
+          <!-- Storytelling -->
+          <div class="col-md-6 col-lg-3">
+            <div class="p-4 border rounded-4 h-100 shadow-sm">
+              <i class="bi bi-book-half display-4 text-warning mb-3"></i>
+              <h5 class="fw-semibold">Cultural Storytelling</h5>
+              <p class="small">
+                Preserve Bakonzo wisdom through engaging sessions open to all
+                ages, online or in person.
+              </p>
+            </div>
+          </div>
+
+          <!-- Scholarships -->
+          <div class="col-md-6 col-lg-3">
+            <div class="p-4 border rounded-4 h-100 shadow-sm">
+              <i class="bi bi-cash-coin display-4 text-success mb-3"></i>
+              <h5 class="fw-semibold">Scholarships & Support</h5>
+              <p class="small">
+                We fundraise to support learners — whether you're just starting
+                out or returning to school.
+              </p>
+            </div>
+          </div>
+
+          <!-- Community Forum -->
+          <div class="col-md-6 col-lg-3">
+            <div class="p-4 border rounded-4 h-100 shadow-sm">
+              <i class="bi bi-chat-square-text display-4 text-info mb-3"></i>
+              <h5 class="fw-semibold">Community Forum</h5>
+              <p class="small">
+                Join our online space for learners, educators, professionals,
+                and mentors to collaborate.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="text-center mt-5">
+          <a
+            href="#join"
+            class="btn btn-success px-5 py-2 rounded-pill fw-semibold"
+            >Get Involved</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <section id="blog" class="py-5 bg-light text-dark">
+      <div class="container" data-aos="fade-up">
+        <h2 class="text-center text-success fw-bold mb-5">News & Blog</h2>
+
+        <div class="row g-4">
+          <!-- Blog Post 1 -->
+          <div class="col-md-6 col-lg-4">
+            <div class="card border-0 shadow-sm rounded-4 h-100">
+              <img
+                src="/images/godwin-how.JPG"
+                class="card-img-top rounded-top-4"
+                style="height: 180px; object-fit: cover"
+                alt="Story 1"
+              />
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title fw-semibold">
+                  From Rwenzori to Michigan
+                </h5>
+                <p class="card-text small flex-grow-1">
+                  How Godwin T. went from Kasese to becoming a Software Engineer
+                  at Ford Motor Company and Chairman of the Bakonzo Community in
+                  the US.
+                </p>
+
+                <!-- Collapsible Section -->
+                <div class="collapse" id="story1">
+                  <p class="card-text small">
+                    Growing up in the foothills of the Rwenzori Mountains,
+                    Godwin's passion for problem-solving led him to pursue
+                    computer science. After excelling at university, he earned
+                    an opportunity with Ford Motor Company, becoming not just a
+                    top engineer, but a cultural beacon for Bakonzo youth in the
+                    diaspora. Today, he balances code and community — leading
+                    initiatives for cultural preservation, mentorship, and
+                    digital innovation.
+                  </p>
+                </div>
+
+                <a
+                  class="btn btn-outline-success btn-sm mt-2"
+                  data-bs-toggle="collapse"
+                  href="#story1"
+                  role="button"
+                  data-toggle-text
+                >
+                  Read More
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Blog Post 2 -->
+          <div class="col-md-6 col-lg-4">
+            <div class="card border-0 shadow-sm rounded-4 h-100">
+              <img
+                src="/images/185ba170-d2e4-481a-8584-6b2bea1db490.JPG"
+                class="card-img-top rounded-top-4"
+                style="height: 180px; object-fit: cover"
+                alt="Picnic"
+              />
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title fw-semibold">
+                  Community Picnic: Highlights
+                </h5>
+                <p class="card-text small flex-grow-1">
+                  See what happened at our recent meet-up in Washington.
+                  Laughter, dance, and new connections all around!
+                </p>
+                <div class="collapse" id="story2">
+                  <p class="card-text small">
+                    With over 80 members attending, the event featured
+                    traditional Bakonzo dance, storytelling for kids, and shared
+                    meals. A true bonding moment.
+                  </p>
+                </div>
+                <a
+                  class="btn btn-outline-success btn-sm mt-2"
+                  data-bs-toggle="collapse"
+                  href="#story2"
+                  role="button"
+                  data-toggle-text
+                >
+                  Read More
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Blog Post 3 -->
+          <div class="col-md-6 col-lg-4">
+            <div class="card border-0 shadow-sm rounded-4 h-100">
+              <img
+                src="/images/omusinga.webp"
+                class="card-img-top rounded-top-4"
+                style="height: 180px; object-fit: cover"
+                alt="Voices"
+              />
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title fw-semibold">Voices of the Bakonzo</h5>
+                <p class="card-text small flex-grow-1">
+                  Reflections from elders and youth on culture, change, and
+                  keeping our identity strong abroad.
+                </p>
+                <div class="collapse" id="story3">
+                  <p class="card-text small">
+                    “Our ways live in us,” says elder Mzee Byaruhanga. This
+                    series captures voices from across generations sharing
+                    pride, grief, and unity.
+                  </p>
+                </div>
+                <a
+                  class="btn btn-outline-success btn-sm mt-2"
+                  data-bs-toggle="collapse"
+                  href="#story3"
+                  role="button"
+                  data-toggle-text
+                >
+                  Read More
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="text-center mt-5">
+          <a
+            href="#join"
+            class="btn btn-success px-5 py-2 rounded-pill fw-semibold"
+            >Contribute a Story</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery -->
+    <section id="gallery" class="py-5 bg-light">
+      <div class="container">
+        <div class="text-center mb-5">
+          <h2 class="fw-bold text-success">
+            <i class="bi bi-images me-2"></i>Community Gallery
+          </h2>
+          <p class="text-muted">Highlights from our community moments</p>
+        </div>
+        <div class="row g-3 justify-content-center" id="galleryGrid">
+          <div class="col-6 col-sm-4 col-md-3 gallery-item">
+            <a
+              href="/images/185ba170-d2e4-481a-8584-6b2bea1db490.JPG"
+              data-lightbox="bakonzo-gallery"
+            >
+              <img
+                src="/images/185ba170-d2e4-481a-8584-6b2bea1db490.JPG"
+                alt="Bakonzo Event 1"
+                class="img-fluid gallery-thumb"
+              />
+            </a>
+          </div>
+          <div class="col-6 col-sm-4 col-md-3 gallery-item">
+            <a
+              href="/images/PHOTO-2024-05-27-21-22-13.jpg"
+              data-lightbox="bakonzo-gallery"
+            >
+              <img
+                src="/images/PHOTO-2024-05-27-21-22-13.jpg"
+                alt="Bakonzo Event 1"
+                class="img-fluid gallery-thumb"
+              />
+            </a>
+          </div>
+          <div class="col-6 col-sm-4 col-md-3 gallery-item">
+            <a href="/images/03f7338e-88f4-41ff-94ab-aed387d6d5e8.JPG" data-lightbox="bakonzo-gallery">
+              <img
+                src="/images/03f7338e-88f4-41ff-94ab-aed387d6d5e8.JPG"
+                alt="Bakonzo Event 1"
+                class="img-fluid gallery-thumb"
+              />
+            </a>
+          </div>
+          <div class="col-6 col-sm-4 col-md-3 gallery-item">
+            <a href="/images/17c221a6-7fd3-4382-9df5-2aebd81605fc.JPG" data-lightbox="bakonzo-gallery">
+              <img
+                src="/images/17c221a6-7fd3-4382-9df5-2aebd81605fc.JPG"
+                alt="Bakonzo Event 1"
+                class="img-fluid gallery-thumb"
+              />
+            </a>
+          </div>
+          <div class="col-6 col-sm-4 col-md-3 gallery-item">
+            <a href="/images/26caeeca-c6f5-4a60-bf66-ff9dc22ab479.JPG" data-lightbox="bakonzo-gallery">
+              <img
+                src="/images/26caeeca-c6f5-4a60-bf66-ff9dc22ab479.JPG"
+                alt="Bakonzo Event 1"
+                class="img-fluid gallery-thumb"
+              />
+            </a>
+          </div>
+          
+          <div class="col-6 col-sm-4 col-md-3 gallery-item">
+            <a href="/images/7a39bf7f-06e0-4a2e-a2bf-ba26b1bfb2ed.JPG" data-lightbox="bakonzo-gallery">
+              <img
+                src="/images/7a39bf7f-06e0-4a2e-a2bf-ba26b1bfb2ed.JPG"
+                alt="Bakonzo Event 1"
+                class="img-fluid gallery-thumb"
+              />
+            </a>
+          </div>
+          <div class="col-6 col-sm-4 col-md-3 gallery-item">
+            <a href="/images/9968aa35-485b-47a2-8b0e-a15ba8f25369.JPG" data-lightbox="bakonzo-gallery">
+              <img
+                src="/images/9968aa35-485b-47a2-8b0e-a15ba8f25369.JPG"
+                alt="Bakonzo Event 1"
+                class="img-fluid gallery-thumb"
+              />
+            </a>
+          </div>
+          <div class="col-6 col-sm-4 col-md-3 gallery-item">
+            <a href="/images/73b5787e-10c6-49b4-bf8e-cd1772dca684.JPG" data-lightbox="bakonzo-gallery">
+              <img
+                src="/images/73b5787e-10c6-49b4-bf8e-cd1772dca684.JPG"
+                alt="Bakonzo Event 1"
+                class="img-fluid gallery-thumb"
+              />
+            </a>
+          </div>
+
+          <!-- Hidden initially -->
+      <div class="col-6 col-sm-4 col-md-3 gallery-item d-none more-gallery">
+        <a href="/images/02348da6-ae44-4019-b1fb-451deb8eae1b.JPG" data-lightbox="bakonzo-gallery">
+          <img
+            src="/images/02348da6-ae44-4019-b1fb-451deb8eae1b.JPG"
+            alt="Bakonzo Event 1"
+            class="img-fluid gallery-thumb"
+          />
+        </a>
+      </div>
+      <div class="col-6 col-sm-4 col-md-3 gallery-item d-none more-gallery">
+        <a href="/images/02e61f52-47fa-4396-b27d-e7095f7138e4.JPG" data-lightbox="bakonzo-gallery">
+          <img
+            src="/images/02e61f52-47fa-4396-b27d-e7095f7138e4.JPG"
+            alt="Bakonzo Event 1"
+            class="img-fluid gallery-thumb"
+          />
+        </a>
+      </div>
+      <div class="col-6 col-sm-4 col-md-3 gallery-item d-none more-gallery">
+        <a href="/images/acc697c9-59a4-4b06-80ce-34989f62d79d.JPG" data-lightbox="bakonzo-gallery">
+          <img
+            src="/images/acc697c9-59a4-4b06-80ce-34989f62d79d.JPG"
+            alt="Bakonzo Event 1"
+            class="img-fluid gallery-thumb"
+          />
+        </a>
+      </div>
+      <div class="col-6 col-sm-4 col-md-3 gallery-item d-none more-gallery">
+        <a href="/images/e03d1fa8-b828-42a3-87f6-076f3c7c35cf.JPG" data-lightbox="bakonzo-gallery">
+          <img
+            src="/images/e03d1fa8-b828-42a3-87f6-076f3c7c35cf.JPG"
+            alt="Bakonzo Event 1"
+            class="img-fluid gallery-thumb"
+          />
+        </a>
+      </div>
+      <!-- Add as many as needed -->
+    </div>
+
+    <div class="text-center mt-4">
+      <button class="btn btn-outline-success" id="toggleGallery">See More</button>
+    </div>
+  </div>
+
+          <!-- Repeat as needed for more photos -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Join Us Section -->
+    <section id="join" class="py-5 bg-white text-dark">
+      <div class="container" data-aos="fade-up">
+        <h2 class="text-center text-success fw-bold mb-5">Join Us</h2>
+
+        <div class="row g-5">
+          <!-- Left: Form -->
+          <div class="col-md-6">
+            <form>
+              <div class="mb-3">
+                <label for="name" class="form-label fw-semibold"
+                  >Full Name</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="name"
+                  placeholder="e.g. Godwin Tusime"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label fw-semibold"
+                  >Email Address</label
+                >
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  placeholder="you@example.com"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="interest" class="form-label fw-semibold"
+                  >Why do you want to join?</label
+                >
+                <textarea
+                  class="form-control"
+                  id="interest"
+                  rows="4"
+                  placeholder="Tell us briefly..."
+                ></textarea>
+              </div>
+              <button
+                type="submit"
+                class="btn btn-success px-4 py-2 rounded-pill fw-semibold"
+              >
+                Submit Application
+              </button>
+            </form>
+          </div>
+
+          <!-- Right: Community Info -->
+          <div class="col-md-6">
+            <h5 class="fw-bold">Membership Benefits</h5>
+            <ul class="list-unstyled">
+              <li>
+                <i class="bi bi-check-circle-fill text-success me-2"></i> Access
+                to private events & virtual meetups
+              </li>
+              <li>
+                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                Cultural connection & language groups
+              </li>
+              <li>
+                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                Networking, mentorship, and visibility
+              </li>
+              <li>
+                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                Opportunity to lead and give back
+              </li>
+            </ul>
+
+            <h6 class="mt-4 fw-semibold">Join the Community Chat:</h6>
+            <a
+              href="https://wa.me/1XXXXXXXXXX?text=Hello%20Omukonzo%20Team%2C%20I'd%20like%20to%20join%20the%20community!"
+              target="_blank"
+              class="btn btn-outline-success btn-sm me-2 mt-2"
+            >
+              <i class="bi bi-whatsapp me-1"></i> WhatsApp Group
+            </a>
+
+            <a
+              href="https://www.linkedin.com/groups/your-group-id"
+              target="_blank"
+              class="btn btn-outline-primary btn-sm mt-2"
+            >
+              <i class="bi bi-linkedin me-1"></i> LinkedIn Group
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5 bg-light text-dark">
+      <div class="container" data-aos="fade-up">
+        <h2 class="text-center text-success fw-bold mb-5">Contact Us</h2>
+
+        <div class="row g-4">
+          <!-- Contact Info -->
+          <div class="col-md-6">
+            <h5 class="fw-semibold">We're happy to hear from you!</h5>
+            <p class="mb-1">
+              <i class="bi bi-envelope-fill me-2 text-success"></i>
+              abakonzo.usa@info.com
+            </p>
+            <p class="mb-1">
+              <i class="bi bi-telephone-fill me-2 text-success"></i> +1 (123)
+              456-7890
+            </p>
+            <p>
+              <i class="bi bi-geo-alt-fill me-2 text-success"></i> USA-based
+              chapter, national outreach
+            </p>
+          </div>
+
+          <!-- Contact Form -->
+          <div class="col-md-6">
+            <form>
+              <div class="mb-3">
+                <label for="contactName" class="form-label fw-semibold"
+                  >Name</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="contactName"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="contactEmail" class="form-label fw-semibold"
+                  >Email</label
+                >
+                <input
+                  type="email"
+                  class="form-control"
+                  id="contactEmail"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="contactMessage" class="form-label fw-semibold"
+                  >Message</label
+                >
+                <textarea
+                  class="form-control"
+                  id="contactMessage"
+                  rows="4"
+                  required
+                ></textarea>
+              </div>
+              <button type="submit" class="btn btn-success rounded-pill px-4">
+                Send Message
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+
+    <footer class="footer text-white pt-5 pb-4">
+      <div class="d-flex flex-wrap justify-content-center gap-3 mb-3">
+        <a href="#about" class="text-warning text-decoration-none">About</a>
+        <a href="#events" class="text-warning text-decoration-none">Events</a>
+        <a href="#members" class="text-warning text-decoration-none">Members</a>
+        <a href="#education" class="text-warning text-decoration-none">Education</a>
+        <a href="#gallery" class="text-warning text-decoration-none">Gallery</a>
+        <a href="#blog" class="text-warning text-decoration-none">Blog</a>
+        <a href="#join" class="text-warning text-decoration-none">Join</a>
+        <a href="#contact" class="text-warning text-decoration-none">Contact</a>
+      </div>
+      
+
+        <div class="mb-3">
+          <a href="https://facebook.com" class="text-white me-3"
+            ><i class="bi bi-facebook"></i
+          ></a>
+          <a href="https://instagram.com" class="text-white me-3"
+            ><i class="bi bi-instagram"></i
+          ></a>
+          <a href="https://wa.me/1XXXXXXXXXX" class="text-white me-3"
+            ><i class="bi bi-whatsapp"></i
+          ></a>
+          <a
+            href="https://www.linkedin.com/groups/your-group-id"
+            class="text-white"
+            ><i class="bi bi-linkedin"></i
+          ></a>
+        </div>
+
+        <p class="text-muted small mb-0">
+          &copy; 2025 Omukonzo USA. All rights reserved.
+        </p>
+      </div>
+      <div class="text-center border-top pt-3 mt-4">
+        <small id="copyright-year"></small>
+        <small id="copyright-year"></small> — Powered by
+        <a
+          href="https://olivwin.com/olivwintechnonogies"
+          class="text-warning text-decoration-none"
+          target="_blank"
+          >Olivwin Technologies</a
+        >
+      </div>
+    </footer>
+
+    <!-- BACK TO TOP -->
+    <button id="topBtn" title="Back to Top">↑</button>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox-plus-jquery.min.js"></script>
+
+    <script>
+      AOS.init();
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll("[data-toggle-text]").forEach((button) => {
+          const targetId =
+            button.getAttribute("href") ||
+            button.getAttribute("data-bs-target");
+          const collapseEl = document.querySelector(targetId);
+
+          collapseEl.addEventListener("shown.bs.collapse", () => {
+            button.textContent = "Show Less";
+          });
+
+          collapseEl.addEventListener("hidden.bs.collapse", () => {
+            button.textContent = "Read More";
+          });
+        });
+      });
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const navLinks = document.querySelectorAll(
+          ".navbar-collapse .nav-link"
+        );
+        const navCollapse = document.querySelector(".navbar-collapse");
+
+        navLinks.forEach((link) => {
+          link.addEventListener("click", () => {
+            const isOpen = navCollapse.classList.contains("show");
+            if (isOpen) {
+              new bootstrap.Collapse(navCollapse).hide();
+            }
+          });
+        });
+      });
+    </script>
+    <script>
+      const startYear = 2025;
+      const currentYear = new Date().getFullYear();
+      const yearText =
+        currentYear > startYear
+          ? `© ${startYear}–${currentYear}`
+          : `© ${startYear} The Bakonzo Community In The USA. All rights reserved.`;
+      document.getElementById("copyright-year").textContent = `${yearText}`;
+      const topBtn = document.getElementById("topBtn");
+      window.onscroll = () => {
+        topBtn.style.display = window.scrollY > 200 ? "block" : "none";
+      };
+      topBtn.onclick = () => window.scrollTo({ top: 0, behavior: "smooth" });
+
+      // Loader
+      window.addEventListener("load", () => {
+        document.getElementById("loader").classList.add("hidden");
+
+        const galleryImages = document.querySelectorAll(".gallery-img");
+        const modalImage = document.getElementById("modalImage");
+
+        galleryImages.forEach((img) => {
+          img.addEventListener("click", () => {
+            const src = img.getAttribute("data-bs-img");
+            modalImage.src = src;
+          });
+        });
+      });
+      const toggleBtn = document.getElementById('toggleGallery');
+  const hiddenItems = document.querySelectorAll('.more-gallery');
+  let expanded = false;
+
+  toggleBtn.addEventListener('click', () => {
+    if (!expanded) {
+      hiddenItems.forEach((el, i) => {
+        el.classList.remove('d-none');
+        setTimeout(() => el.classList.add('show'), 50 * i); // staggered animation
+      });
+      toggleBtn.textContent = 'Show Less';
+
+      // Scroll into view after expanding
+      setTimeout(() => {
+        document.getElementById('galleryGrid').scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }, 500);
+
+    } else {
+      hiddenItems.forEach(el => {
+        el.classList.remove('show');
+        setTimeout(() => el.classList.add('d-none'), 300);
+      });
+      toggleBtn.textContent = 'Show More';
+    }
+
+    expanded = !expanded;
+  });
+    </script>
+  </body>
+</html>
